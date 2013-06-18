@@ -2,77 +2,75 @@
 
 body {
 	font-family: arial, helvetica, sans-serif;
-	font-size : 13px;
+	font-size: 13px;
 }
 
 div {
-	padding : 12px 15px;
+	padding: 12px 15px;
 }
 
 p {
-	padding : 8px 4px;
+	padding: 8px 4px;
 }
 
-
 h1 {
-	display : block;
-	font-size : 174%;
-	font-weight : bold;
-	color : #333;
-	border-bottom : 2px solid #EBF0DF;
+	display: block;
+	font-size: 174%;
+	font-weight: bold;
+	color: #333;
+	border-bottom: 2px solid #EBF0DF;
 }
 
 .container {
-	padding : 4px;
-	margin : 2px;
-	border : #eee 1px solid;
-	width : 480px;	
+	padding: 4px;
+	margin: 2px;
+	border: #eee 1px solid;
+	width: 480px;
 }
 
 textarea {
 	position: relative;
-	background: transparent;	
-	height : 120px;
-	width : 480px;
-	resize : none;
+	background: transparent;
+	height: 120px;
+	width: 480px;
+	resize: none;
 	overflow: hidden;
-	border : none;
-	outline : none;
+	border: none;
+	outline: none;
 }
 
-div.Overlay {
-	white-space: pre-wrap;
+/** レイヤー関係のスタイル */
+div.Layer {
 	position: absolute;
-    text-align: left;
-    overflow : hidden;
-    color: transparent;
+	color: transparent;
+	white-space: pre-wrap;
+	text-align: left;
+	overflow: hidden;
 }
 
-div.Overlay span {
-    display: inline-block;
-    max-width : 100%;
+div.Layer span {
+	display: inline-block;
+	max-width: 100%;
 }
 
-div.Overlay span b {
-    background: #d8dfea;
-    background: -webkit-gradient(linear, center top, center bottom, from(#dce6fb),to(#bdcff1));
-    background: -webkit-linear-gradient(#dce6fb,#bdcff1);
-    background: -moz-linear-gradient(#dce6fb,#bdcff1);
-    background: -ms-linear-gradient(#dce6fb,#bdcff1);
-    background: -o-linear-gradient(#dce6fb,#bdcff1);
-    background: linear-gradient(#dce6fb,#bdcff1);
-
-    -webkit-box-shadow: 0 0 0 1px #a3bcea;
-    -moz-box-shadow: 0 0 0 1px #a3bcea;
-    -ms-box-shadow: 0 0 0 1px #a3bcea;
-    -o-box-shadow: 0 0 0 1px #a3bcea;
-    box-shadow: 0 0 0 1px #a3bcea;
-
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
-    border-radius: 2px;
-
-    font-weight: normal;
+div.Layer span b {
+	background: #d8dfea;
+	background: -webkit-gradient(linear, center top, center bottom, from(#dce6fb),
+		to(#bdcff1) );
+	background: -webkit-linear-gradient(#dce6fb, #bdcff1);
+	background: -moz-linear-gradient(#dce6fb, #bdcff1);
+	background: -ms-linear-gradient(#dce6fb, #bdcff1);
+	background: -o-linear-gradient(#dce6fb, #bdcff1);
+	background: linear-gradient(#dce6fb, #bdcff1);
+	-webkit-box-shadow: 0 0 0 1px #a3bcea;
+	-moz-box-shadow: 0 0 0 1px #a3bcea;
+	-ms-box-shadow: 0 0 0 1px #a3bcea;
+	-o-box-shadow: 0 0 0 1px #a3bcea;
+	box-shadow: 0 0 0 1px #a3bcea;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
+	font-weight: normal;
 }

@@ -6,13 +6,13 @@
  */
 (function($) {
 
-	// オーバーレイ
-	var overlay = function(textarea) {
+	// レイヤ
+	var underlay = function(textarea) {
 
 		var $elem = $(textarea), oldval = $elem.val(),
-		// オーバーレイエリアに適用する mixin
+		// レイヤに適用する mixin
 		mixin = {
-			copyStyle : function() {
+			cssSync : function() {
 				return this.css({
 					padding : $elem.css('padding'),
 					margin : $elem.css('margin'),
@@ -20,50 +20,51 @@
 					"font-size" : $elem.css('font-size')
 				});
 			},
-			sync : function() {
+			adjust : function() {
 				var pos = $elem.position();
 				return this.css({
 					width : $elem.outerWidth() + 'px',
-					left : pos.left + 'px'
+					left : pos.left + 'px',
+					top : pos.top + 'px'
 				});
 			},
-			replaceHtml : function() {
-				return this.children('span').html(layerHtml()).end();
+			refresh : function() {
+				var re = new RegExp(/(^|\s)#(.+?)(\s|$)/g), v = $elem.val();
+				var html = v.replace(re, function(m, p1, p2, p3, offset, str) {
+					return p1 + '<b>#' + p2 + '</b>' + p3;
+				});
+				return this.children('span').html(html).end();
 			}
 		},
-		// レイヤー用の HTML に置換
-		layerHtml = function() {
-			var re = new RegExp(/(^|\s)#(.+?)(\s|$)/g), v = $elem.val();
-			return v.replace(re, function(m, p1, p2, p3, offset, str) {
-				return p1 + '<b>#' + p2 + '</b>' + p3;
-			});
-		},
-		// オーバーレイ本体
-		$div = $('<div class="Overlay"><span></span></div>')
-				.insertBefore($elem).extend(mixin).copyStyle().sync();
-		$elem.on('scroll', function(){
-			$elem.height($elem.height() + $elem.scrollTop());
-		});
+		// レイヤ本体
+		$div = $('<div class="Layer"><span></span></div>').insertBefore($elem)
+				.extend(mixin).cssSync().adjust();
 
 		return {
-			update : function(evt) {
-				if ($elem.val() !== oldval) {
-					$div.replaceHtml();
-					oldval = $elem.val();
+			update : function() {
+				var curval = $elem.val();
+				if (curval !== oldval) {
+					$div.refresh();
+					oldval = curval;
 				}
 			}
 		};
 	};
-	// textarea の変更を拾ってオーバーレイエリアを更新する
+	// textarea の変更を拾ってレイヤを更新する
 	var hashtag = function(textarea) {
-		var $elem = $(textarea);
+		var $elem = $(textarea), evtsuffix = '.hashtag';
 
 		var bind = function() {
-			var events = [ 'keydown', 'keyup', 'keypress', 'click', 'change',
-					'blur' ], layer = overlay(textarea);
+			var events = [ 'keydown', 'keyup', 'keypress', 'click', 'change' ], layer = underlay(textarea);
 			$.each(events, function(i, evt) {
-				$elem.on(evt + '.hashtag', $.proxy(layer.update, layer));
+				$elem.on(evt + evtsuffix, $.proxy(layer.update, layer));
 			});
+
+			// リサイズではなく、高さを自動拡張する
+			$elem.on('scroll' + evtsuffix, function() {
+				$elem.height($elem.height() + $elem.scrollTop());
+			});
+
 			$elem.data('hashtag', 'initialized');
 		};
 
