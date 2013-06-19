@@ -29,7 +29,7 @@
 				});
 			},
 			refresh : function() {
-				var re = new RegExp(/(^|\s)#(.+?)(\s|$)/g), v = $elem.val();
+				var re = new RegExp(/(^|\s)#(\S+?)(\s|$)/g), v = $elem.val();
 				var escaped = $('<div>').text(v).html();
 				var html = escaped.replace(re, function(m, p1, p2, p3, offset, str) {
 					return p1 + '<b>#' + p2 + '</b>' + p3;
