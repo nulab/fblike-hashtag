@@ -30,7 +30,8 @@
 			},
 			refresh : function() {
 				var re = new RegExp(/(^|\s)#(.+?)(\s|$)/g), v = $elem.val();
-				var html = v.replace(re, function(m, p1, p2, p3, offset, str) {
+				var escaped = $('<div>').text(v).html();
+				var html = escaped.replace(re, function(m, p1, p2, p3, offset, str) {
 					return p1 + '<b>#' + p2 + '</b>' + p3;
 				});
 				return this.children('span').html(html).end();
